@@ -6,14 +6,14 @@ project(
   default_options : ['warning_level=3', 'cpp_std=c++17'],
 )
 
-neural-network_dep = dependency('neural-network', fallback : ['neural-network', 'neural-network_dep'])
+neural_network_dep = dependency('neural-network', fallback : ['neural-network', 'neural_network_dep'])
 
 dependencies = [
-  neural=network_dep
+  neural_network_dep
 ]
 
 sources = [
-  'main.cpp',
+  'src/main.cpp',
 ]
 
 exe = executable(
@@ -23,4 +23,21 @@ exe = executable(
   dependencies : dependencies,
 )
 
-test('basic', exe)
+# ==================================
+# 测试
+# ==================================
+# 引入 Google Test 
+# ==================================
+gtest_dep = dependency('gtest', fallback: ['gtest', 'gtest_dep'])
+
+# ==================================
+# 测试可执行文件
+# ==================================
+neural_network_test_exe = executable(
+  'neural_network_tests',
+  files('tests/test_neural_network.cpp'),
+  dependencies: [gtest_dep, neural_network_dep],
+)
+
+
+test('neural-network', neural_network_test_exe)

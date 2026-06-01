@@ -67,3 +67,7 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+subprojects/fmt-12.0.0/
+subprojects/packagecache/
+subprojects/googletest-1.17.0/
